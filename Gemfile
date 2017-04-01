@@ -62,7 +62,11 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 # Registration and authentication
 gem 'sorcery'
+
+gem 'simple_form'
