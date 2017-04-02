@@ -13,4 +13,10 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    logout
+    flash[:success] = 'See you later!'
+    redirect_to root_path
+  end
 end
