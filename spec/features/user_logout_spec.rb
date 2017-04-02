@@ -13,7 +13,6 @@ feature 'USER LOGS OUT' do
   end
 
   scenario 'logs out' do
-    puts page.body
     click_link 'Log Out'
 
     expect(page).to have_selector('.alert.alert-success', text: 'See you later!')
