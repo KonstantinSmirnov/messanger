@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :message do
-    user 
+    association :sender, factory: :user 
     topic "MyString"
     text "MyText"
   end

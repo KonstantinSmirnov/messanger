@@ -7,15 +7,12 @@ class MessagesController < ApplicationController
 
   def create
     current_user = User.find(params[:user_id])
-    @message = current_user.messages.build(message_params)
+    @message = current_user.sent_messages.build(message_params)
 
     if @message.save
       flash[:success] = 'Message was successfully sent'
       redirect_to root_path
     else
-      @message.errors.full_messages.each do |msg|
-        flash.now[:danger] = msg
-      end
       render :new
     end
   end

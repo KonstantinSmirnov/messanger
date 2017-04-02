@@ -8,10 +8,10 @@ RSpec.describe Message, type: :model do
   end
 
   it 'is invalid without user' do
-    message = FactoryGirl.build(:message, user: nil)
+    message = FactoryGirl.build(:message, sender: nil)
 
     expect(message).not_to be_valid
-    expect(message.errors[:user]).to include("can't be blank")
+    expect(message.errors[:sender]).to include("can't be blank")
   end
 
   it 'is invalid without topic' do
