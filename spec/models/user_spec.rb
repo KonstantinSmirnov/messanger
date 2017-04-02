@@ -9,8 +9,20 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Create' do
+    it 'is invalid without name' do
+      user = User.create(
+        email: 'test@test.com',
+        password: 'password',
+        password_confirmation: 'password'
+      )
+
+      expect(user).not_to be_valid
+      expect(user.errors[:name]).to include("can't be blank")
+    end
+
     it 'is invalid without an email' do
       user = User.create(
+        name: 'User',
         password: 'password',
         password_confirmation: 'password'
       )
@@ -21,6 +33,7 @@ RSpec.describe User, type: :model do
 
     it 'is invalid without a pasword' do
       user = User.create(
+        name: 'User',
         email: 'test@test.com',
         password_confirmation: 'password'
       )
@@ -31,6 +44,7 @@ RSpec.describe User, type: :model do
 
     it 'is invalid without a password confirmation' do
       user = User.create(
+        name: 'User',
         email: 'test@test.com',
         password: 'password'
       )
@@ -41,6 +55,7 @@ RSpec.describe User, type: :model do
 
     it 'is invalid with a password of spacebars' do
       user = User.create(
+        name: 'User',
         email: 'test@test.com',
         password: '   ',
         password_confirmation: '   '
@@ -53,6 +68,7 @@ RSpec.describe User, type: :model do
 
     it 'is invalid with password less than 6 symbols' do
       user = User.create(
+        name: 'User',
         email: 'test@test.com',
         password: '123',
         password_confirmation: '123'  
@@ -64,6 +80,7 @@ RSpec.describe User, type: :model do
 
     it 'is invalid with invalid email' do
       user = User.create(
+        name: 'User',
         email: 'invalid-email.com',
         password: 'password',
         password_confirmation: 'password'
@@ -77,6 +94,7 @@ RSpec.describe User, type: :model do
       user1 = FactoryGirl.create(:user)      
 
       user2 = User.create(
+        name: 'User',
         email: user1.email,
         password: 'password',
         password_confirmation: 'password'
@@ -88,6 +106,7 @@ RSpec.describe User, type: :model do
 
     it 'creates with valid data' do
       user = User.create(
+        name: 'User',
         email: 'test@test.com',
         password: 'password',
         password_confirmation: 'password'
@@ -119,6 +138,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'updates with valid data' do
+      user.name = 'User'
       user.email = 'another@email.com'
       user.password = 'password'
       user.password_confirmation = 'password'
