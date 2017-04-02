@@ -1,0 +1,8 @@
+<div class='offset-md-3 col-md-6'>
+  <h1>New Message</h1>
+  <%= simple_form_for [:user, @message] do |f| %>
+    <%= f.input :topic %>
+    <%= f.input :text %>
+    <%= f.submit 'Send', class: 'btn btn-primary' %>
+  <% end %>
+</div>

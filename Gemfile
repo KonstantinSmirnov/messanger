@@ -64,6 +64,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 # Registration and authentication
