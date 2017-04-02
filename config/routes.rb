@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
 
-  root 'static_pages#index'
-  get 'static_pages/index'
+  root 'sessions#new'
 
   resources :users
 
