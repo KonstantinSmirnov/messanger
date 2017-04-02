@@ -1,2 +1,8 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<div class='offset-md-3 col-md-6'>
+  <h1>Log in</h1>
+  <%= simple_form_for @user, url: login_path do |f| %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.submit 'Log In', class: 'btn btn-primary' %>
+  <% end %>
+</div>
