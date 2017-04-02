@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
 
-  root 'sessions#new'
+  get 'sessions/new'
+
+  root 'dashboard#index'
 
   resources :users
 
