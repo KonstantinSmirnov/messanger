@@ -1,7 +1,15 @@
 <div class='offset-md-3 col-md-6'>
   <h1>New Message</h1>
   <%= simple_form_for [:user, @message] do |f| %>
-    <%= f.input :recipient_email %>
+    <%= f.input :recipient_email, label: 'Recipient emails', :error => false %>
+    <% if @message.errors.messages[:recipient_email].present? %>
+      <div class="message_recipient_email has-error">
+        <% @message.errors.messages[:recipient_email].each do |e| %>
+          <span class="help-block"><%= e %></span><br>
+        <% end %>
+      </div>
+      <br>
+    <% end %>
     <%= f.input :topic %>
     <%= f.input :text %>
     <%= f.submit 'Send', class: 'btn btn-primary' %>

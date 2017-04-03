@@ -19,13 +19,13 @@ feature 'MESSAGE' do
       expect(page).to have_selector('.message_recipient_email.has-error span.help-block', text: "can't be blank")
     end
 
-    scenario 'fails if recipiend does not exist' do
+    scenario 'fails if recipient does not exist' do
       fill_in 'message_recipient_email', with: 'not@existing.email'
       fill_in 'message_topic', with: 'test topic'
       fill_in 'message_text', with: 'test text'
       click_button 'Send'
 
-      expect(page).to have_selector('.alert.alert-danger', text: "Recipient not found.")
+      expect(page).to have_selector('.message_recipient_email.has-error span.help-block', text: "User with email not@existing.email does not exist")
     end
 
     scenario 'fails without topic' do

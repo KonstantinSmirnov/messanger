@@ -8,11 +8,16 @@ class MessagesController < ApplicationController
   def create
     current_user = User.find(params[:user_id])
     @message = current_user.sent_messages.build(message_params)
-    recipient = User.find_by(email: params[:message][:recipient_email])
-    flash.now[:danger] = 'Recipient not found. Check if email is valid.' if recipient == nil
-    @message.recipient = recipient
+    
+    if @message.valid?
+      recipient_emails = params[:message][:recipient_email].split(',')
+      recipient_emails.each do |email|
+        recipient = User.find_by(email: email.strip)
+        message = current_user.sent_messages.build(message_params)
+        message.recipient = recipient
+        message.save
+      end
 
-    if @message.save
       flash[:success] = 'Message was successfully sent'
       redirect_to root_path
     else
@@ -25,4 +30,5 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:recipient, :recipient_email, :topic, :text)
   end
+
 end
