@@ -3,6 +3,7 @@ include UserAuthentication
 
 feature 'MESSAGE' do
   let(:user) { FactoryGirl.create(:user, password: 'password', password_confirmation: 'password') }
+  let!(:recipient) { FactoryGirl.create(:recipient) }
 
   context 'form validation' do
     before(:each) do
@@ -10,7 +11,25 @@ feature 'MESSAGE' do
       visit new_user_message_path(user)
     end  
 
+    scenario 'fails without recipient email' do
+      fill_in 'message_topic', with: 'test topic'
+      fill_in 'message_text', with: 'test text'
+      click_button 'Send'
+
+      expect(page).to have_selector('.message_recipient_email.has-error span.help-block', text: "can't be blank")
+    end
+
+    scenario 'fails if recipiend does not exist' do
+      fill_in 'message_recipient_email', with: 'not@existing.email'
+      fill_in 'message_topic', with: 'test topic'
+      fill_in 'message_text', with: 'test text'
+      click_button 'Send'
+
+      expect(page).to have_selector('.alert.alert-danger', text: "Recipient not found.")
+    end
+
     scenario 'fails without topic' do
+      fill_in 'message_recipient_email', with: 'test@test.com'
       fill_in 'message_text', with: 'test text'
       click_button 'Send'
 
@@ -18,6 +37,7 @@ feature 'MESSAGE' do
     end
 
     scenario 'fails without text' do
+      fill_in 'message_recipient_email', with: 'test@test.com'
       fill_in 'message_topic', with: 'test topic'
       click_button 'Send'
 
@@ -25,6 +45,7 @@ feature 'MESSAGE' do
     end
 
     scenario 'created with valid data' do
+      fill_in 'message_recipient_email', with: recipient.email
       fill_in 'message_topic', with: 'test topic'
       fill_in 'message_text', with: 'test text'
       click_button 'Send'

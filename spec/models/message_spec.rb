@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Message, type: :model do
   it 'has a valid factory' do
-    message = FactoryGirl.create(:message)
+    message = FactoryGirl.build(:message)
+    message.recipient_email = 'test@test.com'
+    message.save
 
     expect(message).to be_valid
   end

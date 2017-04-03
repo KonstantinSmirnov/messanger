@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :message do
     association :sender, factory: :user 
+    association :recipient, factory: :recipient
     topic "MyString"
     text "MyText"
   end

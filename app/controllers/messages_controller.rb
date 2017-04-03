@@ -8,6 +8,9 @@ class MessagesController < ApplicationController
   def create
     current_user = User.find(params[:user_id])
     @message = current_user.sent_messages.build(message_params)
+    recipient = User.find_by(email: params[:message][:recipient_email])
+    flash.now[:danger] = 'Recipient not found. Check if email is valid.' if recipient == nil
+    @message.recipient = recipient
 
     if @message.save
       flash[:success] = 'Message was successfully sent'
@@ -20,6 +23,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:topic, :text)
+    params.require(:message).permit(:recipient, :recipient_email, :topic, :text)
   end
 end
