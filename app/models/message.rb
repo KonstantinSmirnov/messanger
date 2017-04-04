@@ -27,5 +27,8 @@ class Message < ApplicationRecord
   def validate_recipient
     errors.add(:recipient, "can't be blank") if recipient.nil?
   end
-
+  
+  def read!
+    update_attribute(:is_read?, true)
+  end
 end

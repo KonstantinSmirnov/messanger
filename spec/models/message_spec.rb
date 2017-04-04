@@ -33,4 +33,20 @@ RSpec.describe Message, type: :model do
     expect(message).not_to be_valid
     expect(message.errors[:text]).to include("can't be blank")
   end
+
+  it 'has is_read? = false by default' do
+    message = FactoryGirl.build(:message)
+    message.recipient_email = recipient.email
+
+    expect(message.is_read?).to eq(false)
+  end
+
+  it 'has is_read?  = true after when message is open' do
+    message = FactoryGirl.build(:message)
+    message.recipient_email = recipient.email
+
+    message.read!
+
+    expect(message.is_read?).to eq(true)
+  end
 end

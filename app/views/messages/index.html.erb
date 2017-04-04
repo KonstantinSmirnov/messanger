@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan='2'>Topic</th>
+      <th>From</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <td scope="row">
+          <i class='fa fa-<%= message_status_icon(message.is_read?) %>'></i>
+        </td>
+        <td colspan='2'><%= link_to message.topic, user_message_path(message.recipient, message) %></td>
+        <td><%= message.sender.name %></td>
+        <td><%= message.sender.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

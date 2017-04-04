@@ -8,22 +8,26 @@
       <% if current_user %>
         <li class='nav-item'>
           <%= link_to new_user_message_path(current_user), class: 'nav-link' do %>
-            <span class='fa fa-edit'></span> New message
+            <i class='fa fa-send'></i> New message
+          <% end %>
+        </li>
+        <span class='nav-link'>|</span>
+        <li class='nav-item'>
+          <%= link_to user_messages_path(current_user), class: 'nav-link' do %>
+            <i class='fa fa-inbox'></i> Inbox <span class="badge badge-primary"><%= inbox_count(current_user) %></span>
           <% end %>
         </li>
         <span class='nav-link'>|</span>
         <li class='nav-item'>
           <%= link_to '#', class: 'nav-link' do %>
-            Inbox <span class="badge badge-primary"> 10
+            <i class='fa fa-share'></i> Outbox
           <% end %>
         </li>
         <span class='nav-link'>|</span>
         <li class='nav-item'>
-          <%= link_to 'Outbox', '#', class: 'nav-link' %>
-        </li>
-        <span class='nav-link'>|</span>
-        <li class='nav-item'>
-          <%= link_to 'Drafts', '#', class: 'nav-link' %>
+          <%= link_to '#', class: 'nav-link' do %>
+            <i class='fa fa-edit'></i> Draft
+          <% end %>
         </li>
       <% end %>
     </ul>
