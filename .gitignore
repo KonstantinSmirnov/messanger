@@ -36,3 +36,6 @@ public/system/
 
 # remove .env files
 .env
+
+#ignore file with test runs
+spec/examples.txt
