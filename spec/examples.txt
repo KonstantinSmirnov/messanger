@@ -11,14 +11,14 @@ example_id                                       | status  | run_time        |
 ./spec/features/messages_drafts_spec.rb[1:4]     | pending | 0.00001 seconds |
 ./spec/features/messages_drafts_spec.rb[1:5]     | pending | 0.00003 seconds |
 ./spec/features/messages_drafts_spec.rb[1:6]     | pending | 0.00002 seconds |
-./spec/features/messages_inbox_spec.rb[1:1:1]    | passed  | 0.38267 seconds |
-./spec/features/messages_inbox_spec.rb[1:1:2]    | passed  | 0.3907 seconds  |
-./spec/features/messages_inbox_spec.rb[1:2:1]    | passed  | 0.37455 seconds |
-./spec/features/messages_inbox_spec.rb[1:2:2]    | passed  | 0.38298 seconds |
-./spec/features/messages_inbox_spec.rb[1:2:3]    | passed  | 0.39798 seconds |
-./spec/features/messages_inbox_spec.rb[1:2:4]    | passed  | 0.40385 seconds |
-./spec/features/messages_inbox_spec.rb[1:2:5]    | passed  | 0.41618 seconds |
-./spec/features/messages_inbox_spec.rb[1:2:6]    | pending | 0.00001 seconds |
+./spec/features/messages_inbox_spec.rb[1:1:1]    | passed  | 0.39219 seconds |
+./spec/features/messages_inbox_spec.rb[1:1:2]    | passed  | 0.38717 seconds |
+./spec/features/messages_inbox_spec.rb[1:2:1]    | passed  | 0.36945 seconds |
+./spec/features/messages_inbox_spec.rb[1:2:2]    | passed  | 0.37938 seconds |
+./spec/features/messages_inbox_spec.rb[1:2:3]    | passed  | 0.81723 seconds |
+./spec/features/messages_inbox_spec.rb[1:2:4]    | passed  | 6.13 seconds    |
+./spec/features/messages_inbox_spec.rb[1:2:5]    | passed  | 0.86071 seconds |
+./spec/features/messages_inbox_spec.rb[1:2:6:1]  | unknown |                 |
 ./spec/features/user_login_spec.rb[1:1]          | passed  | 0.01896 seconds |
 ./spec/features/user_login_spec.rb[1:2]          | passed  | 0.0552 seconds  |
 ./spec/features/user_login_spec.rb[1:3]          | passed  | 0.05838 seconds |

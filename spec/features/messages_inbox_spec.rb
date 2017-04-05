@@ -37,6 +37,8 @@ feature 'INBOX MESSAGES' do
   end
 
   context 'index view' do
+
+
     before(:each) do
       @message = FactoryGirl.build(:message, sender: user, recipient: recipient)
       @message.recipient_email = recipient.email
@@ -73,7 +75,23 @@ feature 'INBOX MESSAGES' do
       expect(page).to have_selector('tr td i.fa.fa-circle-thin')
     end
 
-    scenario 'can remove message'
+    context 'remove message' do
+
+      before(:all) do
+        Capybara.current_driver = :chrome
+      end
+      after(:all) do
+        Capybara.use_default_driver
+      end
+
+      scenario 'can remove message' do
+        find(:css, 'i.fa.fa-trash').click
+        page.driver.browser.switch_to.alert.accept
+
+        expect(page).not_to have_text(@message.topic)
+        expect(current_path).to eq(user_messages_path(recipient))
+      end
+    end
 
   end
 end
