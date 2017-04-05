@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id
   has_many :received_messages, class_name: 'Message', foreign_key: :recipient_id
-  has_many :drafts
+  has_many :drafts 
 
   validates :password, length: { minimum: 6 }, if: -> { new_record? || changes["crypted_password"] }
   validates :password, confirmation: true, if: -> { new_record? || changes["crypted_password"] }

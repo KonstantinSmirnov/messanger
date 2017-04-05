@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Recipients</th>
+      <th colspan='2'>Topic</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @drafts.each do |draft| %>
+      <tr>
+        <td><%= draft.recipient_email %></td>
+        <td colspan='2'><%= draft.topic %></td>
+        <td>
+          <%= link_to user_draft_path(draft.user, draft), method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class='fa fa-trash'></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
