@@ -5,6 +5,8 @@ example_id                                       | status  | run_time        |
 ./spec/features/message_spec.rb[1:1:3]           | passed  | 0.41889 seconds |
 ./spec/features/message_spec.rb[1:1:4]           | passed  | 0.41277 seconds |
 ./spec/features/message_spec.rb[1:1:5]           | passed  | 0.4347 seconds  |
+./spec/features/messages_drafts_spec.rb[1:1]     | passed  | 0.35971 seconds |
+./spec/features/messages_drafts_spec.rb[1:2]     | passed  | 0.74773 seconds |
 ./spec/features/messages_inbox_spec.rb[1:1:1]    | passed  | 0.40203 seconds |
 ./spec/features/messages_inbox_spec.rb[1:1:2]    | passed  | 0.41584 seconds |
 ./spec/features/messages_inbox_spec.rb[1:2:1]    | passed  | 0.3861 seconds  |
@@ -30,6 +32,12 @@ example_id                                       | status  | run_time        |
 ./spec/features/user_registration_spec.rb[1:3:1] | passed  | 0.11871 seconds |
 ./spec/helpers/dashboard_helper_spec.rb[1:1]     | pending | 0.00001 seconds |
 ./spec/helpers/sessions_helper_spec.rb[1:1]      | pending | 0.00001 seconds |
+./spec/models/draft_spec.rb[1:1]                 | passed  | 0.08618 seconds |
+./spec/models/draft_spec.rb[1:2]                 | passed  | 0.08679 seconds |
+./spec/models/draft_spec.rb[1:3]                 | passed  | 0.14209 seconds |
+./spec/models/draft_spec.rb[1:4]                 | passed  | 0.08532 seconds |
+./spec/models/draft_spec.rb[1:5]                 | passed  | 0.08953 seconds |
+./spec/models/draft_spec.rb[1:6]                 | passed  | 0.00737 seconds |
 ./spec/models/message_spec.rb[1:1]               | passed  | 0.23945 seconds |
 ./spec/models/message_spec.rb[1:2]               | passed  | 0.16389 seconds |
 ./spec/models/message_spec.rb[1:3]               | passed  | 0.2442 seconds  |
