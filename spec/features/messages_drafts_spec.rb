@@ -32,14 +32,23 @@ feature 'DRAFT MESSAGE' do
       visit user_drafts_path(user)
     end
 
+    scenario 'drafts link is active when on drafts page' do
+      expect(page).to have_selector('.nav-item.active', text: 'Drafts')
+    end
+
     scenario 'see draft on drafts index page' do
       expect(page).to have_selector('table tbody tr td', text: @draft.topic)
       expect(page).to have_selector('table tbody tr td', text: @draft.recipient_email)
     end
 
-    scenario 'can send draft as a message'
+    scenario 'can send draft as a message', js: true do
+      first("tr[data-link=\"#{new_user_message_path(@draft.user, draft_id: @draft.id)}\"] td").click
 
-    scenario 'after sending draft as a message, draft to be removed'
+      expect(page).to have_selector('h1', text: 'New Message')
+      expect(find_field('Recipient emails').value).to eq(@draft.recipient_email)
+      expect(find_field('Topic').value).to eq(@draft.topic)
+      expect(find_field('Text').value).to eq(@draft.text)
+    end
 
     context 'remove draft' do
 

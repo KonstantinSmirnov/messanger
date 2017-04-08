@@ -3,6 +3,12 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
+    if !params[:draft_id].nil?
+      draft = Draft.find(params[:draft_id])
+      @message.recipient_email = draft.recipient_email
+      @message.topic = draft.topic
+      @message.text = draft.text 
+    end
   end
 
   def create

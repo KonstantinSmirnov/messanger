@@ -6,9 +6,9 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-clickable">
     <% @drafts.each do |draft| %>
-      <tr>
+      <tr data-link="<%= new_user_message_path(current_user, draft_id: draft.id) %>">
         <td><%= draft.recipient_email %></td>
         <td colspan='2'><%= draft.topic %></td>
         <td>

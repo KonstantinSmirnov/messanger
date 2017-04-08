@@ -6,27 +6,27 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mx-auto">
       <% if current_user %>
-        <li class='nav-item'>
+        <li class="nav-item <%= active_nav?('New message') %>">
           <%= link_to new_user_message_path(current_user), class: 'nav-link' do %>
             <i class='fa fa-send'></i> New message
           <% end %>
         </li>
         <span class='nav-link'>|</span>
-        <li class='nav-item'>
+        <li class="nav-item <%= active_nav?('Inbox') %>">
           <%= link_to user_messages_path(current_user), class: 'nav-link' do %>
             <i class='fa fa-inbox'></i> Inbox <span class="badge badge-primary"><%= inbox_count(current_user) %></span>
           <% end %>
         </li>
         <span class='nav-link'>|</span>
-        <li class='nav-item'>
+        <li class="<%= active_nav?('Outbx') %>">
           <%= link_to '#', class: 'nav-link' do %>
             <i class='fa fa-share'></i> Outbox
           <% end %>
         </li>
         <span class='nav-link'>|</span>
-        <li class='nav-item'>
+        <li class="nav-item <%= active_nav?('Drafts') %> ">
           <%= link_to user_drafts_path(current_user), class: 'nav-link' do %>
-            <i class='fa fa-edit'></i> Draft
+            <i class='fa fa-edit'></i> Drafts
           <% end %>
         </li>
       <% end %>

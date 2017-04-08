@@ -10,6 +10,13 @@ feature 'INBOX MESSAGES' do
   end
 
   context 'Navbar' do
+    
+    scenario 'inbox link is active when on inbox page' do
+      visit user_messages_path(recipient)
+
+      expect(page).to have_selector('.nav-item.active', text: 'Inbox')
+    end
+
     scenario 'inbox label shows unread messages count' do
       3.times do
         message = FactoryGirl.build(:message, sender: user, recipient: recipient)
@@ -48,7 +55,7 @@ feature 'INBOX MESSAGES' do
     end
       
     scenario 'can see inbox messages' do
-      expect(page).to have_selector('tr td a', text: @message.topic)
+      expect(page).to have_selector('tr td', text: @message.topic)
     end
 
     scenario 'unread messages have unread icon' do
@@ -62,14 +69,14 @@ feature 'INBOX MESSAGES' do
       expect(page).to have_selector('tr td i.fa.fa-circle-thin')
     end
 
-    scenario 'can open message' do
-      click_link @message.topic
+    scenario 'can open message', js: true do
+      first("tr[data-link=\"#{user_message_path(@message.recipient, @message)}\"] td").click
 
       expect(page).to have_selector('h1', text: @message.topic)
     end
 
-    scenario 'message is read when is open' do
-      click_link @message.topic
+    scenario 'message is read when is open', js: true do
+      first("tr[data-link=\"#{user_message_path(@message.recipient, @message)}\"] td").click
       visit user_messages_path(recipient)
 
       expect(page).to have_selector('tr td i.fa.fa-circle-thin')
@@ -77,14 +84,8 @@ feature 'INBOX MESSAGES' do
 
     context 'remove message' do
 
-      before(:all) do
-        Capybara.current_driver = :chrome
-      end
-      after(:all) do
-        Capybara.use_default_driver
-      end
 
-      scenario 'can remove message' do
+      scenario 'can remove message', js: true do
         find(:css, 'i.fa.fa-trash').click
         page.driver.browser.switch_to.alert.accept
 

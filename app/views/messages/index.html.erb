@@ -8,13 +8,13 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-clickable">
     <% @messages.each do |message| %>
-      <tr>
+      <tr data-link="<%= user_message_path(message.recipient, message) %>">
         <td scope="row">
           <i class='fa fa-<%= message_status_icon(message.is_read?) %>'></i>
         </td>
-        <td colspan='2'><%= link_to message.topic, user_message_path(message.recipient, message) %></td>
+        <td colspan='2'><%= message.topic %></td>
         <td><%= message.sender.name %></td>
         <td><%= message.sender.email %></td>
         <td>
