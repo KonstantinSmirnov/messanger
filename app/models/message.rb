@@ -1,6 +1,7 @@
 class Message < ApplicationRecord
 
   attr_accessor :recipient_email
+  # attr_accessor :recipient_id
 
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User'
@@ -34,4 +35,15 @@ class Message < ApplicationRecord
   def read!
     update_attribute(:is_read?, true)
   end
+
+  scope :filter, ->(params) {
+    results = self.where(nil)
+    if !params[:filters].nil?
+      params[:filters].each_pair do |key, value|
+        results = results.where(key => value) if value.present?
+      end
+    end
+    results
+  }
+
 end

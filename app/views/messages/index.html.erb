@@ -2,7 +2,23 @@
     <thead>
       <tr>
         <th></th>
-        <th><%= params[:outbox] == 'true' ? 'To' : 'From' %></th>
+        <th>
+          <div class="dropdown">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= params[:outbox] == 'true' ? 'To' : 'From' %>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <small><%= link_to "All", user_messages_path(current_user, outbox: params[:outbox]), class: 'dropdown-item' %></small>
+              <% @contacts.each do |contact| %>
+                <% if params[:outbox] %>
+                  <small><%= link_to "#{contact.name} [#{contact.email}]", user_messages_path(current_user, outbox: params[:outbox], filters: { recipient_id: contact.id }), class: 'dropdown-item' %></small>
+                <% else %>
+                  <small><%= link_to "#{contact.name} [#{contact.email}]", user_messages_path(current_user, filters: { sender_id: contact.id }), class: 'dropdown-item' %></small>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </th>
         <th>Message</th>
         <th>Date</th>
 

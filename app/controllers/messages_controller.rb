@@ -44,10 +44,14 @@ class MessagesController < ApplicationController
   end
 
   def index
+    @contacts = []
+
     if params[:outbox] == 'true'
-      @messages = current_user.sent_messages.order('created_at desc').paginate(:page => params[:page])
+      current_user.sent_messages.collect(&:recipient_id).uniq.each { |u| @contacts << User.find(u) }
+      @messages = current_user.sent_messages.filter(params).order('created_at desc').paginate(:page => params[:page])
     else
-      @messages = current_user.received_messages.order('created_at desc').paginate(:page => params[:page])
+      current_user.received_messages.collect(&:sender_id).uniq.each { |u| @contacts << User.find(u) }
+      @messages = current_user.received_messages.filter(params).order('created_at desc').paginate(:page => params[:page])
     end
   end
 
