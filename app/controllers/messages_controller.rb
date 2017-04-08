@@ -44,12 +44,16 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = current_user.received_messages.all
+    if params[:outbox] == 'true'
+      @messages = current_user.sent_messages.all
+    else
+      @messages = current_user.received_messages.all
+    end
   end
 
   def show
     @message = Message.find(params[:id])
-    @message.read!
+    @message.read! if @message.recipient == current_user
   end
 
   def destroy

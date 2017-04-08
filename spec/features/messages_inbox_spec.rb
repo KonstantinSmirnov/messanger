@@ -3,17 +3,17 @@ include UserAuthentication
 
 feature 'INBOX MESSAGES' do
   let(:user) { FactoryGirl.create(:user) }
-  let!(:recipient) { FactoryGirl.create(:recipient) }  
-  
+  let!(:recipient) { FactoryGirl.create(:recipient) }
+
   before(:each) do
     login_user_with(recipient.email, 'password')
   end
 
   context 'Navbar' do
-    
-    scenario 'inbox link is active when on inbox page' do
-      visit user_messages_path(recipient)
 
+    scenario 'inbox link is active when on inbox page', js: true do
+      visit user_messages_path(recipient)
+      
       expect(page).to have_selector('.nav-item.active', text: 'Inbox')
     end
 
@@ -53,7 +53,7 @@ feature 'INBOX MESSAGES' do
 
       visit user_messages_path(recipient)
     end
-      
+
     scenario 'can see inbox messages' do
       expect(page).to have_selector('tr td', text: @message.topic)
     end
@@ -70,6 +70,8 @@ feature 'INBOX MESSAGES' do
     end
 
     scenario 'can open message', js: true do
+      puts user_message_path(@message.recipient, @message)
+
       first("tr[data-link=\"#{user_message_path(@message.recipient, @message)}\"] td").click
 
       expect(page).to have_selector('h1', text: @message.topic)
@@ -83,7 +85,6 @@ feature 'INBOX MESSAGES' do
     end
 
     context 'remove message' do
-
 
       scenario 'can remove message', js: true do
         find(:css, 'i.fa.fa-trash').click

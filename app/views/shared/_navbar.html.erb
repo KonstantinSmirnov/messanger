@@ -18,8 +18,8 @@
           <% end %>
         </li>
         <span class='nav-link'>|</span>
-        <li class="<%= active_nav?('Outbx') %>">
-          <%= link_to '#', class: 'nav-link' do %>
+        <li class="nav-item <%= active_nav?('Outbox') %>">
+          <%= link_to user_messages_path(current_user, outbox: true), class: 'nav-link' do %>
             <i class='fa fa-share'></i> Outbox
           <% end %>
         </li>

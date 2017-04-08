@@ -1,28 +1,61 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan='2'>Topic</th>
-      <th>From</th>
-      <th>Email</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody class="table-clickable">
-    <% @messages.each do |message| %>
-      <tr data-link="<%= user_message_path(message.recipient, message) %>">
-        <td scope="row">
-          <i class='fa fa-<%= message_status_icon(message.is_read?) %>'></i>
-        </td>
-        <td colspan='2'><%= message.topic %></td>
-        <td><%= message.sender.name %></td>
-        <td><%= message.sender.email %></td>
-        <td>
-          <%= link_to user_message_path(message.recipient, message), method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <i class='fa fa-trash'></i>
-          <% end %>
-        </td>
+<% if params[:outbox] != 'true' %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th colspan='2'>Topic</th>
+        <th>From</th>
+        <th>Email</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="table-clickable">
+      <% @messages.each do |message| %>
+        <tr data-link="<%= user_message_path(message.recipient, message) %>">
+          <td scope="row">
+            <i class='fa fa-<%= message_status_icon(message.is_read?) %>'></i>
+          </td>
+          <td colspan='2'><%= message.topic %></td>
+          <td><%= message.sender.name %></td>
+          <td><%= message.sender.email %></td>
+          <td>
+            <%= link_to user_message_path(message.recipient, message), method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class='fa fa-trash'></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th colspan='2'>Topic</th>
+        <th>To</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="table-clickable">
+      <% @messages.each do |message| %>
+        <tr data-link="<%= user_message_path(message.sender, message) %>">
+          <td scope="row">
+            <i class='fa fa-<%= message_status_icon(message.is_read?) %>'></i>
+          </td>
+          <td colspan='2'><%= message.topic %></td>
+          <td><%= message.recipient.name %></td>
+          <td><%= message.recipient.email %></td>
+          <td>
+            <%= link_to user_message_path(message.recipient, message), method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class='fa fa-trash'></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<% end %>

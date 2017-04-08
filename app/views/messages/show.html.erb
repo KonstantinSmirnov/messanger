@@ -2,5 +2,10 @@
     <h1><%= @message.topic %></h1>
   </div>
   <div class='offset-md-2 col-md-8'>
+    <h5>From:</h5>
+    <p><%= @message.sender.email %></p>
+    <h5>To:</h5>
+    <p><%= @message.recipient.email %></p>
+    <h5>Message:</h5>
     <p><%= @message.text %></p>
   </div>
