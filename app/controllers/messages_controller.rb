@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
       @draft = current_user.drafts.build(draft_params)
       if @draft.save
         flash[:success] = 'Draft has been saved'
-        redirect_to root_path
+        redirect_to user_drafts_path(current_user)
       else
         flash[:danger] = "Can't save empty draft"
         redirect_to new_user_message_path(current_user)

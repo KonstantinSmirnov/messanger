@@ -1,16 +1,16 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Recipients</th>
       <th colspan='2'>Topic</th>
+      <th>Recipients</th>
       <th></th>
     </tr>
   </thead>
   <tbody class="table-clickable">
     <% @drafts.each do |draft| %>
       <tr data-link="<%= new_user_message_path(current_user, draft_id: draft.id) %>">
-        <td><%= draft.recipient_email %></td>
         <td colspan='2'><%= draft.topic %></td>
+        <td><%= draft.recipient_email %></td>
         <td>
           <%= link_to user_draft_path(draft.user, draft), method: :delete, data: { confirm: 'Are you sure?' } do %>
             <i class='fa fa-trash'></i>
