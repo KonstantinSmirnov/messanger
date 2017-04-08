@@ -45,9 +45,9 @@ class MessagesController < ApplicationController
 
   def index
     if params[:outbox] == 'true'
-      @messages = current_user.sent_messages.all
+      @messages = current_user.sent_messages.order('created_at desc').paginate(:page => params[:page])
     else
-      @messages = current_user.received_messages.all
+      @messages = current_user.received_messages.order('created_at desc').paginate(:page => params[:page])
     end
   end
 

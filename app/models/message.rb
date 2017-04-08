@@ -13,6 +13,9 @@ class Message < ApplicationRecord
   validate :check_if_emails_exist
   before_save :validate_recipient
 
+  # Will paginate
+  self.per_page = 10
+
   def check_if_emails_exist
     emails = recipient_email.split(',')
     emails.each do |email|
@@ -27,7 +30,7 @@ class Message < ApplicationRecord
   def validate_recipient
     errors.add(:recipient, "can't be blank") if recipient.nil?
   end
-  
+
   def read!
     update_attribute(:is_read?, true)
   end

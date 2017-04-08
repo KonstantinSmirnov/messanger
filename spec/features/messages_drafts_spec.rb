@@ -12,7 +12,7 @@ feature 'DRAFT MESSAGE' do
     visit new_user_message_path(user)
 
     click_button 'Save as a draft'
-    
+
     expect(page).to have_selector('.alert', text: "Can't save empty draft")
     expect(current_path).to eq(new_user_message_path(user))
   end
@@ -28,7 +28,7 @@ feature 'DRAFT MESSAGE' do
 
   context 'drafts maintenance' do
     before(:each) do
-      @draft = FactoryGirl.create(:draft, user: user)  
+      @draft = FactoryGirl.create(:draft, user: user)
       visit user_drafts_path(user)
     end
 
@@ -66,6 +66,24 @@ feature 'DRAFT MESSAGE' do
         expect(page).not_to have_text(@draft.topic)
         expect(current_path).to eq(user_drafts_path(user))
       end
+    end
+  end
+
+  context 'pagination' do
+    scenario 'does not show paginate if less than 10 letters' do
+      9.times { FactoryGirl.create(:draft, user: user) }
+
+      visit user_drafts_path(user)
+
+      expect(page).not_to have_selector('.pagination')
+    end
+
+    scenario 'shows paginate if more than 10 letters' do
+      11.times { FactoryGirl.create(:draft, user: user) }
+
+      visit user_drafts_path(user)
+
+      expect(page).to have_selector('.pagination')
     end
   end
 end

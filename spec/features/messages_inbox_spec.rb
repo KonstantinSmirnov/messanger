@@ -13,7 +13,7 @@ feature 'INBOX MESSAGES' do
 
     scenario 'inbox link is active when on inbox page', js: true do
       visit user_messages_path(recipient)
-      
+
       expect(page).to have_selector('.nav-item.active', text: 'Inbox')
     end
 
@@ -44,7 +44,6 @@ feature 'INBOX MESSAGES' do
   end
 
   context 'index view' do
-
 
     before(:each) do
       @message = FactoryGirl.build(:message, sender: user, recipient: recipient)
@@ -94,6 +93,32 @@ feature 'INBOX MESSAGES' do
         expect(current_path).to eq(user_messages_path(recipient))
       end
     end
+  end
 
+  context 'pagination' do
+
+    scenario 'does not show paginate if less than 10 letters' do
+      9.times do
+        message = FactoryGirl.build(:message, sender: user, recipient: recipient)
+        message.recipient_email = recipient.email
+        message.save
+      end
+
+      visit user_messages_path(recipient)
+
+      expect(page).not_to have_selector('.pagination')
+    end
+
+    scenario 'shows paginate if more than 10 letters' do
+      11.times do
+        message = FactoryGirl.build(:message, sender: user, recipient: recipient)
+        message.recipient_email = recipient.email
+        message.save
+      end
+
+      visit user_messages_path(recipient)
+
+      expect(page).to have_selector('.pagination')
+    end
   end
 end

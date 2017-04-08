@@ -1,6 +1,6 @@
 class DraftsController < ApplicationController
   def index
-    @drafts = current_user.drafts
+    @drafts = current_user.drafts.order('created_at desc').paginate(:page => params[:page])
   end
 
   def destroy
