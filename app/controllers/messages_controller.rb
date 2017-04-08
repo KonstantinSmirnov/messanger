@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
       draft = Draft.find(params[:draft_id])
       @message.recipient_email = draft.recipient_email
       @message.topic = draft.topic
-      @message.text = draft.text 
+      @message.text = draft.text
     end
   end
 
@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
 
       current_user = User.find(params[:user_id])
       @message = current_user.sent_messages.build(message_params)
-      
+
       if @message.valid?
         recipient_emails = params[:message][:recipient_email].split(',')
         recipient_emails.each do |email|
@@ -60,7 +60,7 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
     @message.delete
     flash[:success] = 'Message has been deleted'
-    redirect_to user_messages_path(current_user)
+    redirect_to user_messages_path(current_user, outbox: params[:outbox])
   end
 
   private

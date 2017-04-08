@@ -48,7 +48,7 @@
           <td><%= message.recipient.name %></td>
           <td><%= message.recipient.email %></td>
           <td>
-            <%= link_to user_message_path(message.recipient, message), method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= link_to user_message_path(message.recipient, message, outbox: true), method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class='fa fa-trash'></i>
             <% end %>
           </td>
