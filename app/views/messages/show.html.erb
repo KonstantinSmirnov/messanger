@@ -7,5 +7,5 @@
     <h5>To:</h5>
     <p><%= @message.recipient.email %></p>
     <h5>Message:</h5>
-    <p><%= sanitize @message.text, tags: ['b', 'i', 'strong', 'a'] %></p>
+    <p><%= render_text_with_tags(@message.text) %></p>
   </div>

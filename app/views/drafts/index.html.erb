@@ -1,8 +1,7 @@
-<table class="table table-hover">
+<table class="table table-hover table-sm">
   <thead>
     <tr>
       <th>Recipients</th>
-      <th>Topic</th>
       <th>Message</th>
       <th></th>
     </tr>
@@ -10,9 +9,11 @@
   <tbody class="table-clickable">
     <% @drafts.each do |draft| %>
       <tr data-link="<%= new_user_message_path(current_user, draft_id: draft.id) %>">
-        <td><%= draft.recipient_email %></td>
-        <td><%= draft.topic %></td>
-        <td><%= truncate(draft.text, length: 100) %></td>
+        <td><small><%= draft.recipient_email %></small></td>
+        <td>
+          <small><b><%= draft.topic %></b></small><br>
+          <small><%= render_text_preview(draft.text) %></small>
+        </td>
         <td>
           <%= link_to user_draft_path(draft.user, draft), method: :delete, data: { confirm: 'Are you sure?' } do %>
             <i class='fa fa-trash'></i>

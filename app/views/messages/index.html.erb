@@ -1,10 +1,9 @@
-<% if params[:outbox] != 'true' %>
-  <table class="table table-hover">
+  <table class="table table-hover table-sm">
     <thead>
       <tr>
         <th></th>
-        <th>From</th>
-        <th>Topic</th>
+        <th><%= params[:outbox] == 'true' ? 'To' : 'From' %></th>
+        <th>Message</th>
         <th>Date</th>
 
         <th></th>
@@ -12,13 +11,16 @@
     </thead>
     <tbody class="table-clickable">
       <% @messages.each do |message| %>
-        <tr data-link="<%= user_message_path(message.recipient, message) %>">
+        <tr data-link=<%= params[:outbox] == 'true' ? user_message_path(message.sender, message) : user_message_path(message.recipient, message) %>>
           <td scope="row">
             <i class='fa fa-<%= message_status_icon(message.is_read?) %>'></i>
           </td>
-          <td><%= "#{message.sender.name} [#{message.sender.email}]" %></td>
-          <td><%= message.topic %></td>
-          <td><%= message.created_at.to_date %></td>
+          <td><small><%= params[:outbox] == 'true' ? "#{message.recipient.name} [#{message.recipient.email}]" : "#{message.sender.name} [#{message.sender.email}]" %></small></td>
+          <td>
+            <small><b><%= message.topic %></b></small><br>
+            <small><%= render_text_preview(message.text) %></small>
+          </td>
+          <td><small><%= message.created_at.to_date %></small></td>
           <td>
             <%= link_to user_message_path(message.recipient, message), method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class='fa fa-trash'></i>
@@ -28,36 +30,6 @@
       <% end %>
     </tbody>
   </table>
-<% else %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th></th>
-        <th>To</th>
-        <th>Topic</th>
-        <th>Date</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody class="table-clickable">
-      <% @messages.each do |message| %>
-        <tr data-link="<%= user_message_path(message.sender, message) %>">
-          <td scope="row">
-            <i class='fa fa-<%= message_status_icon(message.is_read?) %>'></i>
-          </td>
-          <td><%= "#{message.recipient.name} [#{message.recipient.email}]" %></td>
-          <td><%= message.topic %></td>
-          <td><%= message.created_at.to_date %></td>
-          <td>
-            <%= link_to user_message_path(message.recipient, message, outbox: true), method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <i class='fa fa-trash'></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
 
 <div class="row justify-content-center">
   <%= will_paginate @messages %>
