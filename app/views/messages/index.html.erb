@@ -55,7 +55,7 @@
           </td>
           <td><small><%= message.created_at.to_date %></small></td>
           <td>
-            <%= link_to user_message_path(message.recipient, message), method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= link_to user_message_path(message.recipient, message, outbox: params[:outbox]), method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class='fa fa-trash'></i>
             <% end %>
           </td>
