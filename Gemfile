@@ -73,3 +73,15 @@ gem 'sorcery'
 gem 'simple_form'
 
 gem 'will_paginate', '~> 3.1.0'
+
+# DEPLOY
+group :development do
+  gem 'capistrano-rbenv',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano',         require: false
+  gem 'capistrano3-puma',   require: false
+end
+
+# environment variables
+gem 'dotenv-rails'
