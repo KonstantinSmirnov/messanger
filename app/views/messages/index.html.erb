@@ -1,7 +1,18 @@
   <table class="table table-hover table-sm">
     <thead>
       <tr>
-        <th></th>
+        <th>
+          <div class="dropdown">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <small><%= link_to "All", user_messages_path(current_user, outbox: params[:outbox]), class: 'dropdown-item' %></small>
+              <small><%= link_to "Read", user_messages_path(current_user, outbox: params[:outbox], filters: { is_read?: true }), class: 'dropdown-item' %></small>
+              <small><%= link_to "Not read", user_messages_path(current_user, outbox: params[:outbox], filters: { is_read?: false }), class: 'dropdown-item' %></small>
+            </div>
+          </div>
+        </th>
         <th>
           <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
