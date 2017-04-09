@@ -45,3 +45,18 @@ span.badge.badge-primary,
     width: 5%;
   }
 }
+
+.footer-placeholder {
+  display: block;
+  height: 90px;
+}
+
+nav.navbar.fixed-bottom {
+  background-color: white;
+  padding-top: 0px;
+
+  .container {
+    padding-top: 5px;
+    border-top: 1px solid gray;
+  }
+}
