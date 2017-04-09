@@ -46,4 +46,6 @@ class Message < ApplicationRecord
     results
   }
 
+  scope :search_with, ->(text) { where("topic LIKE ? OR text LIKE ?", "%#{text}%", "%#{text}%") }
+
 end

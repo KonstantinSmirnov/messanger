@@ -49,10 +49,10 @@ class MessagesController < ApplicationController
 
     if params[:outbox] == 'true'
       current_user.sent_messages.collect(&:recipient_id).uniq.each { |u| @contacts << User.find(u) }
-      @messages = current_user.sent_messages.filter(params).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+      @messages = current_user.sent_messages.filter(params).search_with(params[:search_text]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
     else
       current_user.received_messages.collect(&:sender_id).uniq.each { |u| @contacts << User.find(u) }
-      @messages = current_user.received_messages.filter(params).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+      @messages = current_user.received_messages.filter(params).search_with(params[:search_text]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
     end
   end
 

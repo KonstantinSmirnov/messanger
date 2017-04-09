@@ -1,7 +1,7 @@
   <table class="table table-hover table-sm">
     <thead>
       <tr>
-        <th>
+        <td>
           <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
@@ -12,8 +12,8 @@
               <small><%= link_to "Not read", user_messages_path(current_user, outbox: params[:outbox], filters: { is_read?: false }), class: 'dropdown-item' %></small>
             </div>
           </div>
-        </th>
-        <th>
+        </td>
+        <td>
           <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= params[:outbox] == 'true' ? 'To' : 'From' %>
@@ -29,10 +29,17 @@
               <% end %>
             </div>
           </div>
-        </th>
-        <th>Message</th>
-        <th><%= sortable "created_at", "Date", params %></th>
-        <th></th>
+        </td>
+        <td>
+          <form class="">
+            <%= form_tag '', :method => :get do %>
+              <%= text_field_tag :search_text, params[:search_text], class: 'form-control form-control-sm', id: 'search_text', placeholder: 'Message' %>
+              <%= hidden_field_tag :outbox , params[:outbox] %>
+            <% end %>
+          </form>
+        </td>
+        <td><%= sortable "created_at", "Date", params %></td>
+        <td></td>
       </tr>
     </thead>
     <tbody class="table-clickable">
