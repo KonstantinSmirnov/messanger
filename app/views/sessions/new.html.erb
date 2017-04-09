@@ -1,9 +1,13 @@
 <div class='offset-md-3 col-md-6'>
-  <h1>Log in</h1>
+  <div class="text-center">
+    <h1>Log in</h1>
+  </div>
   <%= simple_form_for @user, url: login_path do |f| %>
     <%= f.input :email %>
     <%= f.input :password %>
-    <%= f.submit 'Log In', class: 'btn btn-primary' %>
+    <div class="text-center">
+      <%= f.submit 'Log In', class: 'btn btn-primary' %>
+    </div>
   <% end %>
   <hr>
   <%= link_to 'Registration', new_user_path %>

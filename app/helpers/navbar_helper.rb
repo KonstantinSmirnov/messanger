@@ -1,5 +1,5 @@
 module NavbarHelper
-  
+
   def controller?(controller)
     controller.include?(params[:controller])
   end
@@ -18,6 +18,10 @@ module NavbarHelper
         return 'active' if controller?('messages') && (params[:outbox] == 'true')
       when 'Drafts'
         return 'active' if controller?('drafts')
+      when 'Login'
+        return 'active' if controller?('sessions') && action?('new')
+      when 'Register'
+        return 'active' if controller?('users') && action?('new')
     end
   end
 end

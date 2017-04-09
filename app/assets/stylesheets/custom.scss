@@ -1,7 +1,7 @@
 .table-clickable {
   tr:hover {
     cursor: pointer;
-    color: blue;
+    color: #2B84D2;
   }
 }
 
@@ -10,9 +10,18 @@
     padding-left: 3px;
     padding-right: 3px;
   }
-
   em {
     font-style: normal;
   }
+}
 
+.navbar-light .navbar-nav .active > .nav-link,
+td a,
+.pagination a {
+  color: #2B84D2;
+}
+
+span.badge.badge-primary,
+.btn-primary {
+  background-color: #2B84D2;
 }
