@@ -1,7 +1,7 @@
 require 'rails_helper'
 include UserAuthentication
 
-feature 'OUTBOX MESSAGES' do
+feature 'SENT MESSAGES' do
   let!(:user) { FactoryGirl.create(:user) }
   let!(:recipient) { FactoryGirl.create(:recipient) }
 
@@ -19,7 +19,7 @@ feature 'OUTBOX MESSAGES' do
     scenario 'outbox link is active when on outbox page' do
       visit user_messages_path(user, outbox: true)
 
-      expect(page).to have_selector('.nav-item.active', text: 'Outbox')
+      expect(page).to have_selector('.nav-item.active', text: 'Sent')
     end
   end
 

@@ -14,7 +14,7 @@ module NavbarHelper
         return 'active' if controller?('messages') && action?('new')
       when 'Inbox'
         return 'active' if controller?('messages') && action?('index') && params[:outbox] != 'true'
-      when 'Outbox'
+      when 'Sent'
         return 'active' if controller?('messages') && (params[:outbox] == 'true')
       when 'Drafts'
         return 'active' if controller?('drafts')
