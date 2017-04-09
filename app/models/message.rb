@@ -18,10 +18,10 @@ class Message < ApplicationRecord
   self.per_page = 10
 
   def check_if_emails_exist
-    emails = recipient_email.split(',')
+    emails = recipient_email.split(/[,;]/)
     emails.each do |email|
       if !User.exists?(email: email.strip)
-        errors.add(:recipient_email, "User with email #{email} does not exist \n")
+        errors.add(:recipient_email, "User with email <b>#{email}</b> does not exist \n")
       end
     end
 

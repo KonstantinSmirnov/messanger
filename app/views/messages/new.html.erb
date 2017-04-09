@@ -7,7 +7,7 @@
     <% if @message.errors.messages[:recipient_email].present? %>
       <div class="message_recipient_email has-error">
         <% @message.errors.messages[:recipient_email].each do |e| %>
-          <span class="help-block"><%= e %></span><br>
+          <span class="help-block"><%= e.html_safe %></span><br>
         <% end %>
       </div>
       <br>

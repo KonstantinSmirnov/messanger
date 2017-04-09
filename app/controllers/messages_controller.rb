@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
       @message = current_user.sent_messages.build(message_params)
 
       if @message.valid?
-        recipient_emails = params[:message][:recipient_email].split(',')
+        recipient_emails = params[:message][:recipient_email].split(/[,;]/)
         recipient_emails.each do |email|
           recipient = User.find_by(email: email.strip)
           message = current_user.sent_messages.build(message_params)
