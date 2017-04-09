@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :require_login
+  helper_method :sort_column, :sort_direction
 
   def new
     @message = Message.new
@@ -48,10 +49,10 @@ class MessagesController < ApplicationController
 
     if params[:outbox] == 'true'
       current_user.sent_messages.collect(&:recipient_id).uniq.each { |u| @contacts << User.find(u) }
-      @messages = current_user.sent_messages.filter(params).order('created_at desc').paginate(:page => params[:page])
+      @messages = current_user.sent_messages.filter(params).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
     else
       current_user.received_messages.collect(&:sender_id).uniq.each { |u| @contacts << User.find(u) }
-      @messages = current_user.received_messages.filter(params).order('created_at desc').paginate(:page => params[:page])
+      @messages = current_user.received_messages.filter(params).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
     end
   end
 
@@ -67,6 +68,7 @@ class MessagesController < ApplicationController
     redirect_to user_messages_path(current_user, outbox: params[:outbox])
   end
 
+
   private
 
   def message_params
@@ -75,6 +77,14 @@ class MessagesController < ApplicationController
 
   def draft_params
     params.require(:message).permit(:recipient_email, :topic, :text)
+  end
+
+  def sort_column
+    Message.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
 end
