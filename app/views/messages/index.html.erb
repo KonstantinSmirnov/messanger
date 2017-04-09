@@ -1,7 +1,7 @@
-  <table class="table table-hover table-sm">
+  <table class="table table-hover table-sm" id="table-messages">
     <thead>
       <tr>
-        <td>
+        <td class="message_status">
           <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
@@ -13,7 +13,7 @@
             </div>
           </div>
         </td>
-        <td>
+        <td class="message_contact">
           <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= params[:outbox] == 'true' ? 'To' : 'From' %>
@@ -30,16 +30,16 @@
             </div>
           </div>
         </td>
-        <td>
-          <form class="">
+        <td class="message_message">
+          <form>
             <%= form_tag '', :method => :get do %>
               <%= text_field_tag :search_text, params[:search_text], class: 'form-control form-control-sm', id: 'search_text', placeholder: 'Message' %>
               <%= hidden_field_tag :outbox , params[:outbox] %>
             <% end %>
           </form>
         </td>
-        <td><%= sortable "created_at", "Date", params %></td>
-        <td></td>
+        <td class="message_date"><%= sortable "created_at", "Date", params %></td>
+        <td class="message_options"></td>
       </tr>
     </thead>
     <tbody class="table-clickable">

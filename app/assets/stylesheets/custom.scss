@@ -25,3 +25,23 @@ span.badge.badge-primary,
 .btn-primary {
   background-color: #2B84D2;
 }
+
+#table-messages {
+  table-layout: fixed;
+
+  .message_status {
+    width: 5%;
+  }
+  .message_contact {
+    width: 20%;
+  }
+  .message_message {
+    width: 60%;
+  }
+  .message_date {
+    width: 10%;
+  }
+  .message_options {
+    width: 5%;
+  }
+}
