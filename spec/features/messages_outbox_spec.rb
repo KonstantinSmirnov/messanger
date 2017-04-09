@@ -18,7 +18,7 @@ feature 'OUTBOX MESSAGES' do
   context 'Navbar' do
     scenario 'outbox link is active when on outbox page' do
       visit user_messages_path(user, outbox: true)
-      
+
       expect(page).to have_selector('.nav-item.active', text: 'Outbox')
     end
   end
@@ -30,30 +30,30 @@ feature 'OUTBOX MESSAGES' do
     end
 
     scenario 'unread by recipient messages have unread icon' do
-      expect(page).to have_selector('tr td i.fa.fa-circle')
+      expect(page).to have_selector('tr td i.fa.fa-dot-circle-o')
     end
 
     scenario 'read by recipient messages have read icon' do
       @message.read!
-      
+
       visit user_messages_path(user, outbox: true)
       expect(page).to have_selector('tr td i.fa.fa-circle-thin')
     end
 
     scenario 'can open message', js: true do
       first("tr[data-link=\"#{user_message_path(@message.sender, @message)}\"] td").click
- 
+
       expect(page).to have_selector('h1', text: @message.topic)
     end
 
     scenario 'message is not read when is open', js: true do
       first("tr[data-link=\"#{user_message_path(@message.sender, @message)}\"] td").click
       visit user_messages_path(user, outbox: true)
-      
-      expect(page).to have_selector('tr td i.fa.fa-circle')
+
+      expect(page).to have_selector('tr td i.fa.fa-dot-circle-o')
       expect(page).not_to have_selector('tr td i.fa.fa-circle-thin')
     end
-    
+
   end
 
   context 'remove message' do

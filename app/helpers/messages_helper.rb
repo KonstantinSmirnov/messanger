@@ -5,7 +5,7 @@ module MessagesHelper
   end
 
   def message_status_icon(is_read)
-    is_read == true ? 'circle-thin' : 'circle'
+    is_read == true ? 'circle-thin' : 'dot-circle-o'
   end
 
   def render_text_with_tags(text)

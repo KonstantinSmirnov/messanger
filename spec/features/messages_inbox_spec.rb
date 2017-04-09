@@ -58,7 +58,7 @@ feature 'INBOX MESSAGES' do
     end
 
     scenario 'unread messages have unread icon' do
-      expect(page).to have_selector('tr td i.fa.fa-circle')
+      expect(page).to have_selector('tr td i.fa.fa-dot-circle-o')
     end
 
     scenario 'read messages have read icon' do
