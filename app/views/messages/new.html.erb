@@ -13,7 +13,7 @@
       <br>
     <% end %>
     <%= f.input :topic %>
-    <%= f.input :text %>
+    <%= f.input :text, input_html: { class: 'textarea-resizable' } %>
     <div class='text-center'>
       <%= f.submit 'Send', class: 'btn btn-lg btn-primary' %>
       <%= f.submit 'Save as a draft', name: 'create_draft', class: 'btn btn-lg btn-secondary' %>
